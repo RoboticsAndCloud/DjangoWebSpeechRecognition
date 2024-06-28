@@ -1,0 +1,30 @@
+sudo apt install python3.10
+
+virtualenv -p /usr/bin/python3.10 venv3.10_djan
+
+source ~/LF_Workspace/venv3.10_djan/bin/activate
+
+python -m pip install Django
+
+python3.10 -m pip install -r requirements.txt 
+
+#python manage.py startapp polls
+
+python manage.py runserver
+
+http://localhost:8000/polls/
+
+https://docs.djangoproject.com/zh-hans/5.0/intro/tutorial01/#write-your-first-view
+
+
+database
+http://127.0.0.1:8000/admin/
+admin
+123456
+
+
+
+/home/ascc/LF_Workspace/project_shan/test/Chrome-Web-Speech-API-master
+python3 -m http.server
+
+
