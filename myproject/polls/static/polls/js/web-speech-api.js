@@ -29,6 +29,9 @@ var messages = {
   "copy": {
     msg: 'Content copy to clipboard successfully.',
     class: 'alert-success'},
+  "query": {
+    msg: 'Query successfully.',
+    class: 'alert-success'},
 }
 
 var final_transcript = '';
@@ -169,6 +172,43 @@ function copyToClipboard() {
   }
   showInfo('copy');
 }
+
+$("#query_button").click(function () {
+  if (recognizing) {
+    recognizing = false;
+    recognition.stop();
+  }
+  setTimeout(copyToClipboardAndQuery, 500);
+  
+});
+
+function copyToClipboardAndQuery() {
+  if (document.selection) { 
+      var range = document.body.createTextRange();
+      range.moveToElementText(document.getElementById('results'));
+      range.select().createTextRange();
+      document.execCommand("copy"); 
+  
+  } else if (window.getSelection) {
+      var range = document.createRange();
+       range.selectNode(document.getElementById('results'));
+       window.getSelection().addRange(range);
+       document.execCommand("copy");
+  }
+  showInfo('query');
+  // todo windo.open()
+  console.log("abcccccccccc")
+  console.log(final_transcript)
+  
+  url = 'http://127.0.0.1:8000/polls/smart_query/' + final_transcript
+  if (final_transcript.length == 0) {
+    url = 'http://127.0.0.1:8000/polls/smart_query/When%20was%20the%20inspection%20carried%20out%20last%20time/'
+  }
+  window.open(url)
+  // window.open('http://127.0.0.1:8000/polls/smart_query/When%20was%20the%20inspection%20carried%20out%20last%20time/');
+                 
+}
+
 
 $("#start_button").click(function () {
   if (recognizing) {
