@@ -7,6 +7,7 @@ from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse
 
 from .models import Question
+from smart_sql import smart_sql_query_v2
 
 # def index(request):
 #     latest_question_list = Question.objects.order_by("-pub_date")[:5]
@@ -31,6 +32,21 @@ def voice(request):
     latest_question_list = Question.objects.order_by("-pub_date")[:5]
     context = {"latest_question_list": latest_question_list}
     return render(request, "polls/voice.html", context)
+
+def smart_query(request, input):
+    # latest_question_list = Question.objects.order_by("-pub_date")[:5]
+    # context = {"latest_question_list": latest_question_list}
+    res = []
+    try:
+        res = smart_sql_query_v2.query_demo(input)
+    except Exception as e:
+        print(e)
+
+    response = "smart query: input {input} ********************  result: {res}".format(input = input, res = res)
+
+    return HttpResponse(response)
+
+    # return HttpResponse("smart query: res %s" %res)
 
 
 # def detail(request, question_id):
