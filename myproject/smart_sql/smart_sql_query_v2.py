@@ -92,6 +92,9 @@ data_to_insert = [
 
 def query_database(sql_cmd,database_name):
     conn = sqlite3.connect(database_name)
+    #conn = mysql.connector.connect(user='root', password='123456',
+    #                          host='localhost',
+    #                          database='new_infratie', charset='utf8mb4', collation='utf8mb4_general_ci')
     print(conn)
     cursor = conn.cursor()
 
